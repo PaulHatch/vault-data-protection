@@ -5,12 +5,21 @@ VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{325DA3B1-B0E6-4B48-BF87-D5836CD83CFD}"
 	ProjectSection(SolutionItems) = preProject
+		build.sh = build.sh
 		icon.png = icon.png
 		license.txt = license.txt
 		readme.md = readme.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VaultSharpDataProtection", "VaultSharpDataProtection\VaultSharpDataProtection.csproj", "{771921EA-3B4F-4FF7-8EB8-8D417D602B0A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub", "GitHub", "{419E8810-7322-48F9-89C6-A3A07595D0CD}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+		.github\workflows\release.yml = .github\workflows\release.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VaultSharpDataProtection.Test", "src\VaultSharpDataProtection.Test\VaultSharpDataProtection.Test.csproj", "{BEB0098B-ED06-4B4F-AC05-1D19D0C7E362}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VaultSharpDataProtection", "src\VaultSharpDataProtection\VaultSharpDataProtection.csproj", "{8B078B78-9F98-4839-A161-4B49D5FE65A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,13 +27,20 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{771921EA-3B4F-4FF7-8EB8-8D417D602B0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{771921EA-3B4F-4FF7-8EB8-8D417D602B0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{771921EA-3B4F-4FF7-8EB8-8D417D602B0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{771921EA-3B4F-4FF7-8EB8-8D417D602B0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEB0098B-ED06-4B4F-AC05-1D19D0C7E362}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEB0098B-ED06-4B4F-AC05-1D19D0C7E362}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEB0098B-ED06-4B4F-AC05-1D19D0C7E362}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEB0098B-ED06-4B4F-AC05-1D19D0C7E362}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B078B78-9F98-4839-A161-4B49D5FE65A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B078B78-9F98-4839-A161-4B49D5FE65A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B078B78-9F98-4839-A161-4B49D5FE65A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B078B78-9F98-4839-A161-4B49D5FE65A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{419E8810-7322-48F9-89C6-A3A07595D0CD} = {325DA3B1-B0E6-4B48-BF87-D5836CD83CFD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BF3FBE1A-9F18-49B3-A2BF-1B05CF51FEED}

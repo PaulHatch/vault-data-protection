@@ -1,0 +1,39 @@
+name: Build
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Version
+        id: version
+        uses: paulhatch/semantic-version@v2
+        with:
+          format: "${major}.${minor}.${patch}"
+          tag_prefix: ""
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 2.2.103
+      - name: Build Packages
+        run: |
+          dotnet build -c Release /p:Version=${VERSION} .
+          mkdir packages
+          for project in $(ls src/*/*.csproj | grep -vi "test")
+          do
+            dotnet pack -p:PackageVersion=${PACKAGE_VERSION} -c Release -o ${GITHUB_WORKSPACE}/packages --no-build --no-restore $project
+          done
+          for f in ${GITHUB_WORKSPACE}/packages/*.nupkg
+          do
+            dotnet nuget push $f -k ${{ secrets.NUGET_KEY }} -s https://api.nuget.org/v3/index.json
+          done
+        env:
+          DOTNET_CLI_TELEMETRY_OPTOUT: 1
+          VERSION: ${{ steps.version.outputs.version }}.${{ steps.version.outputs.increment }}
+          PACKAGE_VERSION: ${{ steps.version.outputs.version }}
