@@ -69,8 +69,6 @@ namespace Microsoft.AspNetCore.DataProtection
         /// </summary>
         /// <param name="builder">The builder instance to modify.</param>
         /// <param name="clientBuilder">The client builder.</param>
-        /// <param name="path">The path to store keys to.</param>
-        /// <param name="mountPoint">The Vault key/value mount point.</param>
         /// <returns>
         /// A reference to the <see cref="IDataProtectionBuilder" />.
         /// </returns>
