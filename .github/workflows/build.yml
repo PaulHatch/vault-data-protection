@@ -29,7 +29,7 @@ jobs:
           VERSION: ${{ steps.version.outputs.version }}.${{ steps.version.outputs.increment }}
           PACKAGE_VERSION: ${{ steps.version.outputs.version }}-preview.${{ steps.version.outputs.increment }}
       - name: Run Unit Tests
-        run: dotnet test -c Release --no-build --no-restore -r /sln --filter type=unit src/VaultSharpDataProtection.Test/.
+        run: dotnet test -c Release --no-build --no-restore -r /sln src/VaultSharpDataProtection.Test/.
       - name: Store Image Artifact
         uses: actions/upload-artifact@v1
         with:

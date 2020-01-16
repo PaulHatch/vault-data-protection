@@ -1,14 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Description>This package provides an XmlRepository implementation which can be used to store ASP.NET Data Protection keys in Hashcorp Vault using the VaultSharp client.</Description>
+    <Authors>Paul Hatcherian</Authors>
+    <PackageTags>vault data protection vaultsharp</PackageTags>
     <Copyright>2020 Paul Hatcherian</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Description>This package provides an XmlRepository implementation which can be used to store ASP.NET Data Protection keys in Hashcorp Vault using the VaultSharp client.</Description>
     <RepositoryType>git</RepositoryType>
     <PackageIcon>icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/PaulHatch/vault-data-protection.git</RepositoryUrl>
-    <PackageTags>vault,data protection,vaultsharp</PackageTags>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
