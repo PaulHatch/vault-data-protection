@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.Extensions.DependencyInjection;
 using VaultDataProtection;
 using VaultSharp;
+using VaultSharp.V1.AuthMethods.Token;
 
 namespace Microsoft.AspNetCore.DataProtection
 {
@@ -17,7 +18,7 @@ namespace Microsoft.AspNetCore.DataProtection
         const string _defaultMountPoint = "kv";
 
         /// <summary>
-        /// Configures the data protection system to persist keys to Vault,
+        /// Configures the data protection system to persist keys to Vault
         /// using the default path and mount point.
         /// </summary>
         /// <param name="builder">The builder instance to modify.</param>
@@ -64,7 +65,7 @@ namespace Microsoft.AspNetCore.DataProtection
         }
 
         /// <summary>
-        /// Configures the data protection system to persist keys to Vault,
+        /// Configures the data protection system to persist keys to Vault
         /// using the default path and mount point.
         /// </summary>
         /// <param name="builder">The builder instance to modify.</param>
@@ -105,5 +106,42 @@ namespace Microsoft.AspNetCore.DataProtection
 
             return PersistKeysToVault(builder, clientBuilder(), path, mountPoint);
         }
+
+        /// <summary>
+        /// Configures the data protection system to persist keys to Vault.
+        /// </summary>
+        /// <param name="builder">The builder instance to modify.</param>
+        /// <param name="vaultUri">The Vault URI.</param>
+        /// <param name="token">The Vault access token.</param>
+        /// <param name="path">The path to store keys to.</param>
+        /// <param name="mountPoint">The Vault key/value mount point.</param>
+        /// <returns>
+        /// A reference to the <see cref="IDataProtectionBuilder" />.
+        /// </returns>
+        public static IDataProtectionBuilder PersistKeysToVault(
+            this IDataProtectionBuilder builder,
+            Uri vaultUri,
+            string token,
+            string path,
+            string mountPoint)
+        {
+            var client = new VaultClient(new VaultClientSettings(vaultUri.ToString(), new TokenAuthMethodInfo(token)));
+            return builder.PersistKeysToVault(client, path, mountPoint);
+        }
+
+        /// <summary>
+        /// Configures the data protection system to persist keys to Vault
+        /// using the default path and mount point.
+        /// </summary>
+        /// <param name="builder">The builder instance to modify.</param>
+        /// <param name="vaultUri">The Vault URI.</param>
+        /// <param name="token">The Vault access token.</param>
+        /// <returns>
+        /// A reference to the <see cref="IDataProtectionBuilder" />.
+        /// </returns>
+        public static IDataProtectionBuilder PersistKeysToVault(
+            this IDataProtectionBuilder builder,
+            Uri vaultUri,
+            string token) => builder.PersistKeysToVault(vaultUri, token, null, null);
     }
 }
