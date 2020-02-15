@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.Extensions.DependencyInjection;
-using VaultDataProtection;
+using VaultSharpDataProtection;
 using VaultSharp;
 using VaultSharp.V1.AuthMethods.Token;
 

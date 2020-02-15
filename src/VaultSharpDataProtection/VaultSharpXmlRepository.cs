@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.DataProtection.Repositories;
 using VaultSharp;
 using VaultSharp.Core;
 
-namespace VaultDataProtection
+namespace VaultSharpDataProtection
 {
     /// <summary>
     /// Provides an <see cref="IXmlRepository"/> implementation for storing
