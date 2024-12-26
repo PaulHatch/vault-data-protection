@@ -49,17 +49,11 @@ public class VaultSharpXmlRepository : IXmlRepository
         try
         {
             var response = RunSync(() => _vault.V1.Secrets.KeyValue.V2.ReadSecretAsync(_path, null, _mountPoint));
-            return response.Data.Data.Values.Select(e =>
+            return response.Data.Data.Values.Select(e => e switch
             {
-                if (e is JsonElement jsonElement && jsonElement.ValueKind == JsonValueKind.String)
-                {
-                    var xmlString = jsonElement.GetString();
-                    return XElement.Parse(xmlString);
-                }
-                else
-                {
-                    throw new InvalidCastException($"Expected JSON string, but got {e.GetType()}.");
-                }
+                string v => XElement.Parse(v), // this line might not be necessary is string is never returned now
+                JsonElement { ValueKind: JsonValueKind.String } j when j.GetString() is var s => XElement.Parse(s),
+                _ => throw new InvalidCastException($"Expected JSON string, but got {e.GetType()}.")
             }).ToList()
               .AsReadOnly();
         }
