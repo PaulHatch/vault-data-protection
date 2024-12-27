@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -48,9 +49,13 @@ public class VaultSharpXmlRepository : IXmlRepository
         try
         {
             var response = RunSync(() => _vault.V1.Secrets.KeyValue.V2.ReadSecretAsync(_path, null, _mountPoint));
-            return response.Data.Data.Values.Select(e => XElement.Parse((string)e))
-                .ToList()
-                .AsReadOnly();
+            return response.Data.Data.Values.Select(e => e switch
+            {
+                string v => XElement.Parse(v),
+                JsonElement { ValueKind: JsonValueKind.String } j when j.GetString() is var s => XElement.Parse(s),
+                _ => throw new InvalidCastException($"Expected JSON string, but got {e.GetType()}.")
+            }).ToList()
+              .AsReadOnly();
         }
         catch (VaultApiException e) when (e.StatusCode == 404)
         {
