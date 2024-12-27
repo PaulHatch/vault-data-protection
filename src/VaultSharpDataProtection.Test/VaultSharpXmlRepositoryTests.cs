@@ -13,7 +13,7 @@ public class VaultSharpXmlRepositoryTests
     private const string Path = "Keys";
     private const string MountPoint = "data-protection";
 
-    [Fact]
+    [Fact(Skip = "Requires a running Vault server")]
     public void StoreAndRetrieveKey_ShouldSucceed()
     {
         var vaultClient = new VaultClient(new VaultClientSettings(VaultUri, new TokenAuthMethodInfo(Token)));

@@ -51,7 +51,7 @@ public class VaultSharpXmlRepository : IXmlRepository
             var response = RunSync(() => _vault.V1.Secrets.KeyValue.V2.ReadSecretAsync(_path, null, _mountPoint));
             return response.Data.Data.Values.Select(e => e switch
             {
-                string v => XElement.Parse(v), // this line might not be necessary is string is never returned now
+                string v => XElement.Parse(v),
                 JsonElement { ValueKind: JsonValueKind.String } j when j.GetString() is var s => XElement.Parse(s),
                 _ => throw new InvalidCastException($"Expected JSON string, but got {e.GetType()}.")
             }).ToList()
