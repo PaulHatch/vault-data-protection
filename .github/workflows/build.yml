@@ -11,15 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
       - name: Version
         id: version
-        uses: paulhatch/semantic-version@v2.1
+        uses: paulhatch/semantic-version@v5.4.0
         with:
-          format: "${major}.${minor}.${patch}"
+          version_format: "${major}.${minor}.${patch}"
           tag_prefix: ""
       - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v4.2.0
         with:
           dotnet-version: 3.1.100
       - name: Build Packages
@@ -31,7 +31,7 @@ jobs:
       - name: Run Unit Tests
         run: dotnet test -c Release --no-build --no-restore src/VaultSharpDataProtection.Test/.
       - name: Store Image Artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: packages.tar.gz
           path: /tmp/artifacts/packages.tar.gz
@@ -41,9 +41,9 @@ jobs:
     needs: build
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
       - name: Download Packages Artifact
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v4
         with:
           name: packages.tar.gz
           path: ./packages
