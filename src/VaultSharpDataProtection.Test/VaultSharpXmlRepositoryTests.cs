@@ -8,16 +8,16 @@ using System;
 namespace VaultSharpDataProtection.Test;
 public class VaultSharpXmlRepositoryTests
 {
-    private const string VaultUri = "http://localhost:8200";
-    private const string Token = "hvs.*********************";
-    private const string Path = "Keys";
-    private const string MountPoint = "data-protection";
+    private const string _vaultUri = "http://localhost:8200";
+    private const string _token = "hvs.*********************";
+    private const string _path = "Keys";
+    private const string _mountPoint = "data-protection";
 
     [Fact(Skip = "Requires a running Vault server")]
     public void StoreAndRetrieveKey_ShouldSucceed()
     {
-        var vaultClient = new VaultClient(new VaultClientSettings(VaultUri, new TokenAuthMethodInfo(Token)));
-        var repository = new VaultSharpXmlRepository(vaultClient, Path, MountPoint);
+        var vaultClient = new VaultClient(new VaultClientSettings(_vaultUri, new TokenAuthMethodInfo(_token)));
+        var repository = new VaultSharpXmlRepository(vaultClient, _path, _mountPoint);
 
         var keyXml = """
         <key id="d17a439d-8228-4216-9ea5-16a5424a0788" version="1">

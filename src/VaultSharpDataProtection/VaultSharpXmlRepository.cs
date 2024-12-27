@@ -52,7 +52,7 @@ public class VaultSharpXmlRepository : IXmlRepository
             return response.Data.Data.Values.Select(e => e switch
             {
                 string v => XElement.Parse(v),
-                JsonElement { ValueKind: JsonValueKind.String } j when j.GetString() is var s => XElement.Parse(s),
+                JsonElement { ValueKind: JsonValueKind.String } j when j.GetString() is {} s => XElement.Parse(s),
                 _ => throw new InvalidCastException($"Expected JSON string, but got {e.GetType()}.")
             }).ToList()
               .AsReadOnly();
